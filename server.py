@@ -30,5 +30,8 @@ def prompt(a: float, b: float):
             }
         ]
 
-if __name__ == "__main__":
+def main():
     mcp.run()
+
+if __name__ == "__main__":
+    main()

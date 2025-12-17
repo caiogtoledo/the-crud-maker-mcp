@@ -1,0 +1,11 @@
+[project]
+name = "the-crud-maker-mcp"
+version = "0.1.0"
+dependencies = ["mcp[cli]"]
+
+[project.scripts]
+the-crud-maker-mcp = "server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
