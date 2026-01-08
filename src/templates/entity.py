@@ -1,11 +1,4 @@
-from typing import Dict
-from mcp.server.fastmcp import FastMCP
-
-mcp = FastMCP("the-crud-maker")
-
-@mcp.resource("mcp://examples/entity")
-def get_entity_example() -> str:
-    return """
+ENTITY_EXAMPLE = """
 import abc
 from typing import Optional
 import uuid
@@ -87,9 +80,7 @@ class Alert(abc.ABC):
                 )
 """
 
-@mcp.resource("mcp://examples/tests/entity")
-def get_entity_test_example() -> str:
-    return """
+ENTITY_TEST_EXAMPLE = """
 import pytest
 from src.shared.domain.entities.battery import Battery
 from src.shared.helpers.errors.domain_errors import EntityError
@@ -193,26 +184,3 @@ class Test_Battery:
                 timestamp=int(datetime.datetime.now().timestamp())*1000
             )
 """
-
-@mcp.tool()
-def create_entity(entity_name: str, fields: Dict[str, str]) -> str:
-    """Generates an entity file content following the entity example."""
-    entity_example = get_entity_example()
-    return f"""Create a entity file in the folder /src/shared/domain/entities/{entity_name} that have this fields: {fields}.
-    Follow this example of entity: {entity_example}
-    After create the entity, call the `create_entity_test` tool
-    """
-
-@mcp.tool()
-async def create_entity_test(entity_name: str, fields: Dict[str, str]) -> str:
-    """Generates an entity test file content following the entity test example."""
-    entity_test_example = get_entity_test_example()
-    return f"""Create a entity test file in the folder /tests/shared/domain/entities/{entity_name} that have this fields: {fields}.
-    Follow this example of entity test: {entity_test_example}
-    """
-
-def main():
-    mcp.run()
-
-if __name__ == "__main__":
-    main()
