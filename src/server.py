@@ -11,6 +11,7 @@ from src.templates.repository_mongodb import REPOSITORY_MONGODB_EXAMPLE, REPOSIT
 from src.tools.repository_mongodb import create_repository_mongodb_tool, create_repository_mongodb_test_tool
 from src.templates.presenter import PRESENTER_EXAMPLE 
 from src.tools.presenter import create_presenter_tool
+from src.tools.create_route import create_route_tool
 
 
 mcp = FastMCP("the-crud-maker")
@@ -110,6 +111,11 @@ def get_presenter_example() -> str:
 async def create_presenter(module_name: str, presenter_name: str) -> str:
     """Generates a presenter file content following the presenter example."""
     return create_presenter_tool(module_name, presenter_name)
+
+@mcp.tool(name="create_route")
+async def create_route(route_name: str, url_prefix: str) -> str:
+    """Generates a new route and declare in server.py."""
+    return await create_route_tool(route_name, url_prefix)
 
 def main():
     mcp.run()
