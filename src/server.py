@@ -7,6 +7,8 @@ from src.templates.controller import CONTROLLER_EXAMPLE, CONTROLLER_TEST_EXAMPLE
 from src.tools.controller import create_controller_tool, create_controller_test_tool
 from src.templates.viewmodel import VIEWMODEL_EXAMPLE, VIEWMODEL_TEST_EXAMPLE
 from src.tools.viewmodel import create_viewmodel_tool, create_viewmodel_test_tool
+from src.templates.repository_mongodb import REPOSITORY_MONGODB_EXAMPLE, REPOSITORY_MONGODB_TEST_EXAMPLE
+from src.tools.repository_mongodb import create_repository_mongodb_tool, create_repository_mongodb_test_tool
 
 mcp = FastMCP("the-crud-maker")
 
@@ -78,6 +80,24 @@ async def create_viewmodel(module_name: str, viewmodel_name: str) -> str:
 async def create_viewmodel_test(module_name: str, viewmodel_name: str) -> str:
     """Generates a viewmodel test file content following the viewmodel test example."""
     return create_viewmodel_test_tool(module_name, viewmodel_name)
+
+@mcp.resource("mcp://examples/repository_mongodb")
+def get_repository_mongodb_example() -> str:
+    return REPOSITORY_MONGODB_EXAMPLE
+
+@mcp.resource("mcp://examples/tests/repository_mongodb")
+def get_repository_mongodb_test_example() -> str:
+    return REPOSITORY_MONGODB_TEST_EXAMPLE
+
+@mcp.tool(name="create_repository_mongodb")
+async def create_repository_mongodb(module_name: str, repository_name: str, entity_name: str) -> str:
+    """Generates a mongodb repository file content following the repository example."""
+    return create_repository_mongodb_tool(module_name, repository_name, entity_name)
+
+@mcp.tool(name="create_repository_mongodb_test")
+async def create_repository_mongodb_test(module_name: str, repository_name: str) -> str:
+    """Generates a mongodb repository test file content following the repository test example."""
+    return create_repository_mongodb_test_tool(module_name, repository_name)
 
 def main():
     mcp.run()
