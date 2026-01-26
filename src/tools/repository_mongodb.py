@@ -5,6 +5,7 @@ def create_repository_mongodb_tool(repository_name: str) -> str:
     return f"""Create a mongodb repository file in the folder /src/shared/infra/repositories/{repository_name}_mongodb.py
     Use the interface: {repository_name}_interface.py
     Follow this example of mongodb repository: {REPOSITORY_MONGODB_EXAMPLE}
+    Make sure that you updated the src/shared/environments.py file with this repository
     """
 
 def create_repository_mongodb_test_tool(repository_name: str) -> str:
