@@ -5,6 +5,8 @@ from src.tools.repository_interface import create_repository_interface_tool
 from src.tools.usecase import create_usecase_tool, create_usecase_test_tool
 from src.templates.controller import CONTROLLER_EXAMPLE, CONTROLLER_TEST_EXAMPLE
 from src.tools.controller import create_controller_tool, create_controller_test_tool
+from src.templates.viewmodel import VIEWMODEL_EXAMPLE, VIEWMODEL_TEST_EXAMPLE
+from src.tools.viewmodel import create_viewmodel_tool, create_viewmodel_test_tool
 
 mcp = FastMCP("the-crud-maker")
 
@@ -58,6 +60,24 @@ async def create_controller(module_name: str, entity_name: str, usecase_name: st
 async def create_controller_test(module_name: str, entity_name: str) -> str:
     """Generates a controller test file content following the controller test example."""
     return create_controller_test_tool(module_name, entity_name)
+
+@mcp.resource("mcp://examples/viewmodel")
+def get_viewmodel_example() -> str:
+    return VIEWMODEL_EXAMPLE
+
+@mcp.resource("mcp://examples/tests/viewmodel")
+def get_viewmodel_test_example() -> str:
+    return VIEWMODEL_TEST_EXAMPLE
+
+@mcp.tool(name="create_viewmodel")
+async def create_viewmodel(module_name: str, viewmodel_name: str) -> str:
+    """Generates a viewmodel file content following the viewmodel example."""
+    return create_viewmodel_tool(module_name, viewmodel_name)
+
+@mcp.tool(name="create_viewmodel_test")
+async def create_viewmodel_test(module_name: str, viewmodel_name: str) -> str:
+    """Generates a viewmodel test file content following the viewmodel test example."""
+    return create_viewmodel_test_tool(module_name, viewmodel_name)
 
 def main():
     mcp.run()
