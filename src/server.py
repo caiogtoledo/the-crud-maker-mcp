@@ -9,6 +9,9 @@ from src.templates.viewmodel import VIEWMODEL_EXAMPLE, VIEWMODEL_TEST_EXAMPLE
 from src.tools.viewmodel import create_viewmodel_tool, create_viewmodel_test_tool
 from src.templates.repository_mongodb import REPOSITORY_MONGODB_EXAMPLE, REPOSITORY_MONGODB_TEST_EXAMPLE
 from src.tools.repository_mongodb import create_repository_mongodb_tool, create_repository_mongodb_test_tool
+from src.templates.presenter import PRESENTER_EXAMPLE 
+from src.tools.presenter import create_presenter_tool
+
 
 mcp = FastMCP("the-crud-maker")
 
@@ -95,9 +98,18 @@ async def create_repository_mongodb(module_name: str, repository_name: str, enti
     return create_repository_mongodb_tool(module_name, repository_name, entity_name)
 
 @mcp.tool(name="create_repository_mongodb_test")
-async def create_repository_mongodb_test(module_name: str, repository_name: str) -> str:
+async def create_repository_mongodb_test(repository_name: str) -> str:
     """Generates a mongodb repository test file content following the repository test example."""
-    return create_repository_mongodb_test_tool(module_name, repository_name)
+    return create_repository_mongodb_test_tool(repository_name)
+
+@mcp.resource("mcp://examples/presenter")
+def get_presenter_example() -> str:
+    return PRESENTER_EXAMPLE
+
+@mcp.tool(name="create_presenter")
+async def create_presenter(module_name: str, presenter_name: str) -> str:
+    """Generates a presenter file content following the presenter example."""
+    return create_presenter_tool(module_name, presenter_name)
 
 def main():
     mcp.run()
