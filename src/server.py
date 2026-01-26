@@ -3,6 +3,8 @@ from src.templates.entity import ENTITY_EXAMPLE, ENTITY_TEST_EXAMPLE
 from src.tools.entity import create_entity_tool, create_entity_test_tool
 from src.tools.repository_interface import create_repository_interface_tool
 from src.tools.usecase import create_usecase_tool, create_usecase_test_tool
+from src.templates.controller import CONTROLLER_EXAMPLE, CONTROLLER_TEST_EXAMPLE
+from src.tools.controller import create_controller_tool, create_controller_test_tool
 
 mcp = FastMCP("the-crud-maker")
 
@@ -38,6 +40,24 @@ async def create_usecase(module_name: str, usecase_name: str, business_rules: st
 async def create_usecase_test(module_name: str, usecase_name: str) -> str:
     """Generates an usecase test file content following the usecase test example."""
     return await create_usecase_test_tool(module_name, usecase_name)
+
+@mcp.resource("mcp://examples/controller")
+def get_controller_example() -> str:
+    return CONTROLLER_EXAMPLE
+
+@mcp.resource("mcp://examples/tests/controller")
+def get_controller_test_example() -> str:
+    return CONTROLLER_TEST_EXAMPLE
+
+@mcp.tool(name="create_controller")
+async def create_controller(module_name: str, entity_name: str, usecase_name: str) -> str:
+    """Generates a controller file content following the controller example."""
+    return create_controller_tool(module_name, entity_name, usecase_name)
+
+@mcp.tool(name="create_controller_test")
+async def create_controller_test(module_name: str, entity_name: str) -> str:
+    """Generates a controller test file content following the controller test example."""
+    return create_controller_test_tool(module_name, entity_name)
 
 def main():
     mcp.run()
