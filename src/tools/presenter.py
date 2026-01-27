@@ -1,4 +1,4 @@
-from src.templates.presenter import PRESENTER_EXAMPLE, PRESENTER_TEST_EXAMPLE
+from src.templates.presenter import PRESENTER_EXAMPLE
 
 def create_presenter_tool(module_name: str, presenter_name: str) -> str:
     """Generates a presenter file content following the presenter example."""

@@ -117,6 +117,28 @@ async def create_route(route_name: str, url_prefix: str) -> str:
     """Generates a new route and declare in server.py."""
     return await create_route_tool(route_name, url_prefix)
 
+@mcp.prompt("CRIAR CRUD")
+def prompt(description: str):
+    """
+    Prompt MCP que cria um CRUD utilizando tools específicas
+    """
+    
+    return [
+        {
+            "role": "assistant",
+            "content": f"""
+            Crie um CRUD que tenha o seguinte objetivo: {description}, utilize as ferramentas para cada rota:
+            Caso não exista as entidades necessárias: `create_entity`
+            Caso não exista a interface do repositorio necessário: `create_repository_interface`
+            O caso de uso para cada rota, use: `create_usecase`
+            Para cada rota, crie um viewmodel com: `create_viewmodel`
+            Para cada rota, crie um controller com: `create_controller`
+            Para cada rota, crie um presenter com: `create_presenter`
+            Por fim, use a ferramenta `create_route` para declarar as rotas que forem criadas
+            """
+        }
+    ]
+
 def main():
     mcp.run()
 
