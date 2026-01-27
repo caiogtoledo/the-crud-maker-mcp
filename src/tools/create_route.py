@@ -1,6 +1,6 @@
 from src.templates.route import ROUTES_EXAMPLE
 
-async def create_route_tool(route_name: str, url_prefix: str) -> str:
+def create_route_tool(route_name: str, url_prefix: str) -> str:
     """
     Generates a new route definition to be added to server.py.
     """
