@@ -8,7 +8,7 @@ def create_usecase_tool(module_name: str, usecase_name: str, business_rules: str
     After create the usecase, call the `create_usecase_test` tool
     """
 
-async def create_usecase_test_tool(module_name: str, usecase_name: str) -> str:
+def create_usecase_test_tool(module_name: str, usecase_name: str) -> str:
     """Generates an usecase test file content following the usecase test example."""
     return f"""Create a usecase test file in the folder /tests/modules/{module_name}/app/{usecase_name} to covarage this file: /src/modules/{module_name}/app/{usecase_name}.
     Follow this example of usecase test: {USECASE_TEST_EXAMPLE}
